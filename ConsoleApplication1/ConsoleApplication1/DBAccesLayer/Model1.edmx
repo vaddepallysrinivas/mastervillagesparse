@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MasterDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MasterDataModelStoreContainer">
+          <EntitySet Name="tbl_district" EntityType="MasterDataModel.Store.tbl_district" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_state" EntityType="MasterDataModel.Store.tbl_state" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_taluka" EntityType="MasterDataModel.Store.tbl_taluka" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbl_village" EntityType="MasterDataModel.Store.tbl_village" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__tbl_distr__state__0519C6AF" Association="MasterDataModel.Store.FK__tbl_distr__state__0519C6AF">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_district" EntitySet="tbl_district" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taluk__distr__09DE7BCC" Association="MasterDataModel.Store.FK__tbl_taluk__distr__09DE7BCC">
+            <End Role="tbl_district" EntitySet="tbl_district" />
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taluk__state__0AD2A005" Association="MasterDataModel.Store.FK__tbl_taluk__state__0AD2A005">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__distr__108B795B" Association="MasterDataModel.Store.FK__tbl_villa__distr__108B795B">
+            <End Role="tbl_district" EntitySet="tbl_district" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__state__117F9D94" Association="MasterDataModel.Store.FK__tbl_villa__state__117F9D94">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__taluk__0F975522" Association="MasterDataModel.Store.FK__tbl_villa__taluk__0F975522">
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_district">
+          <Key>
+            <PropertyRef Name="districtId" />
+          </Key>
+          <Property Name="districtId" Type="int" Nullable="false" />
+          <Property Name="districtName" Type="varchar" MaxLength="500" />
+          <Property Name="stateId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_state">
+          <Key>
+            <PropertyRef Name="stateId" />
+          </Key>
+          <Property Name="stateId" Type="int" Nullable="false" />
+          <Property Name="stateName" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_taluka">
+          <Key>
+            <PropertyRef Name="talukaid" />
+          </Key>
+          <Property Name="talukaid" Type="int" Nullable="false" />
+          <Property Name="talukaName" Type="varchar" MaxLength="500" />
+          <Property Name="districtId" Type="int" />
+          <Property Name="stateId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_village">
+          <Key>
+            <PropertyRef Name="villageId" />
+          </Key>
+          <Property Name="villageId" Type="int" Nullable="false" />
+          <Property Name="villageName" Type="varchar" MaxLength="500" />
+          <Property Name="talukaid" Type="int" />
+          <Property Name="districtId" Type="int" />
+          <Property Name="stateId" Type="int" />
+        </EntityType>
+        <Association Name="FK__tbl_distr__state__0519C6AF">
+          <End Role="tbl_state" Type="MasterDataModel.Store.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_district" Type="MasterDataModel.Store.tbl_district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_district">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taluk__distr__09DE7BCC">
+          <End Role="tbl_district" Type="MasterDataModel.Store.tbl_district" Multiplicity="0..1" />
+          <End Role="tbl_taluka" Type="MasterDataModel.Store.tbl_taluka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_district">
+              <PropertyRef Name="districtId" />
+            </Principal>
+            <Dependent Role="tbl_taluka">
+              <PropertyRef Name="districtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taluk__state__0AD2A005">
+          <End Role="tbl_state" Type="MasterDataModel.Store.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_taluka" Type="MasterDataModel.Store.tbl_taluka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_taluka">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__distr__108B795B">
+          <End Role="tbl_district" Type="MasterDataModel.Store.tbl_district" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.Store.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_district">
+              <PropertyRef Name="districtId" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="districtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__state__117F9D94">
+          <End Role="tbl_state" Type="MasterDataModel.Store.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.Store.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__taluk__0F975522">
+          <End Role="tbl_taluka" Type="MasterDataModel.Store.tbl_taluka" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.Store.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_taluka">
+              <PropertyRef Name="talukaid" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="talukaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MasterDataModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MasterDataEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_district" EntityType="MasterDataModel.tbl_district" />
+          <EntitySet Name="tbl_state" EntityType="MasterDataModel.tbl_state" />
+          <EntitySet Name="tbl_taluka" EntityType="MasterDataModel.tbl_taluka" />
+          <EntitySet Name="tbl_village" EntityType="MasterDataModel.tbl_village" />
+          <AssociationSet Name="FK__tbl_distr__state__0519C6AF" Association="MasterDataModel.FK__tbl_distr__state__0519C6AF">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_district" EntitySet="tbl_district" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taluk__distr__09DE7BCC" Association="MasterDataModel.FK__tbl_taluk__distr__09DE7BCC">
+            <End Role="tbl_district" EntitySet="tbl_district" />
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__distr__108B795B" Association="MasterDataModel.FK__tbl_villa__distr__108B795B">
+            <End Role="tbl_district" EntitySet="tbl_district" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_taluk__state__0AD2A005" Association="MasterDataModel.FK__tbl_taluk__state__0AD2A005">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__state__117F9D94" Association="MasterDataModel.FK__tbl_villa__state__117F9D94">
+            <End Role="tbl_state" EntitySet="tbl_state" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_villa__taluk__0F975522" Association="MasterDataModel.FK__tbl_villa__taluk__0F975522">
+            <End Role="tbl_taluka" EntitySet="tbl_taluka" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_district">
+          <Key>
+            <PropertyRef Name="districtId" />
+          </Key>
+          <Property Name="districtId" Type="Int32" Nullable="false" />
+          <Property Name="districtName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="stateId" Type="Int32" />
+          <NavigationProperty Name="tbl_state" Relationship="MasterDataModel.FK__tbl_distr__state__0519C6AF" FromRole="tbl_district" ToRole="tbl_state" />
+          <NavigationProperty Name="tbl_taluka" Relationship="MasterDataModel.FK__tbl_taluk__distr__09DE7BCC" FromRole="tbl_district" ToRole="tbl_taluka" />
+          <NavigationProperty Name="tbl_village" Relationship="MasterDataModel.FK__tbl_villa__distr__108B795B" FromRole="tbl_district" ToRole="tbl_village" />
+        </EntityType>
+        <EntityType Name="tbl_state">
+          <Key>
+            <PropertyRef Name="stateId" />
+          </Key>
+          <Property Name="stateId" Type="Int32" Nullable="false" />
+          <Property Name="stateName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tbl_district" Relationship="MasterDataModel.FK__tbl_distr__state__0519C6AF" FromRole="tbl_state" ToRole="tbl_district" />
+          <NavigationProperty Name="tbl_taluka" Relationship="MasterDataModel.FK__tbl_taluk__state__0AD2A005" FromRole="tbl_state" ToRole="tbl_taluka" />
+          <NavigationProperty Name="tbl_village" Relationship="MasterDataModel.FK__tbl_villa__state__117F9D94" FromRole="tbl_state" ToRole="tbl_village" />
+        </EntityType>
+        <EntityType Name="tbl_taluka">
+          <Key>
+            <PropertyRef Name="talukaid" />
+          </Key>
+          <Property Name="talukaid" Type="Int32" Nullable="false" />
+          <Property Name="talukaName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="districtId" Type="Int32" />
+          <Property Name="stateId" Type="Int32" />
+          <NavigationProperty Name="tbl_district" Relationship="MasterDataModel.FK__tbl_taluk__distr__09DE7BCC" FromRole="tbl_taluka" ToRole="tbl_district" />
+          <NavigationProperty Name="tbl_state" Relationship="MasterDataModel.FK__tbl_taluk__state__0AD2A005" FromRole="tbl_taluka" ToRole="tbl_state" />
+          <NavigationProperty Name="tbl_village" Relationship="MasterDataModel.FK__tbl_villa__taluk__0F975522" FromRole="tbl_taluka" ToRole="tbl_village" />
+        </EntityType>
+        <EntityType Name="tbl_village">
+          <Key>
+            <PropertyRef Name="villageId" />
+          </Key>
+          <Property Name="villageId" Type="Int32" Nullable="false" />
+          <Property Name="villageName" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="talukaid" Type="Int32" />
+          <Property Name="districtId" Type="Int32" />
+          <Property Name="stateId" Type="Int32" />
+          <NavigationProperty Name="tbl_district" Relationship="MasterDataModel.FK__tbl_villa__distr__108B795B" FromRole="tbl_village" ToRole="tbl_district" />
+          <NavigationProperty Name="tbl_state" Relationship="MasterDataModel.FK__tbl_villa__state__117F9D94" FromRole="tbl_village" ToRole="tbl_state" />
+          <NavigationProperty Name="tbl_taluka" Relationship="MasterDataModel.FK__tbl_villa__taluk__0F975522" FromRole="tbl_village" ToRole="tbl_taluka" />
+        </EntityType>
+        <Association Name="FK__tbl_distr__state__0519C6AF">
+          <End Role="tbl_state" Type="MasterDataModel.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_district" Type="MasterDataModel.tbl_district" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_district">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taluk__distr__09DE7BCC">
+          <End Role="tbl_district" Type="MasterDataModel.tbl_district" Multiplicity="0..1" />
+          <End Role="tbl_taluka" Type="MasterDataModel.tbl_taluka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_district">
+              <PropertyRef Name="districtId" />
+            </Principal>
+            <Dependent Role="tbl_taluka">
+              <PropertyRef Name="districtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__distr__108B795B">
+          <End Role="tbl_district" Type="MasterDataModel.tbl_district" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_district">
+              <PropertyRef Name="districtId" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="districtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_taluk__state__0AD2A005">
+          <End Role="tbl_state" Type="MasterDataModel.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_taluka" Type="MasterDataModel.tbl_taluka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_taluka">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__state__117F9D94">
+          <End Role="tbl_state" Type="MasterDataModel.tbl_state" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_state">
+              <PropertyRef Name="stateId" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_villa__taluk__0F975522">
+          <End Role="tbl_taluka" Type="MasterDataModel.tbl_taluka" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="MasterDataModel.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_taluka">
+              <PropertyRef Name="talukaid" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="talukaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MasterDataModelStoreContainer" CdmEntityContainer="MasterDataEntities">
+          <EntitySetMapping Name="tbl_district">
+            <EntityTypeMapping TypeName="MasterDataModel.tbl_district">
+              <MappingFragment StoreEntitySet="tbl_district">
+                <ScalarProperty Name="districtId" ColumnName="districtId" />
+                <ScalarProperty Name="districtName" ColumnName="districtName" />
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_state">
+            <EntityTypeMapping TypeName="MasterDataModel.tbl_state">
+              <MappingFragment StoreEntitySet="tbl_state">
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_taluka">
+            <EntityTypeMapping TypeName="MasterDataModel.tbl_taluka">
+              <MappingFragment StoreEntitySet="tbl_taluka">
+                <ScalarProperty Name="talukaid" ColumnName="talukaid" />
+                <ScalarProperty Name="talukaName" ColumnName="talukaName" />
+                <ScalarProperty Name="districtId" ColumnName="districtId" />
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_village">
+            <EntityTypeMapping TypeName="MasterDataModel.tbl_village">
+              <MappingFragment StoreEntitySet="tbl_village">
+                <ScalarProperty Name="villageId" ColumnName="villageId" />
+                <ScalarProperty Name="villageName" ColumnName="villageName" />
+                <ScalarProperty Name="talukaid" ColumnName="talukaid" />
+                <ScalarProperty Name="districtId" ColumnName="districtId" />
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

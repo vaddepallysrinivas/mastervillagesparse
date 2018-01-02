@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a81fafa78264467b6f4534c491c9473" Name="Diagram1">
+        <EntityTypeShape EntityType="MasterDataModel.tbl_district" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterDataModel.tbl_state" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterDataModel.tbl_taluka" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterDataModel.tbl_village" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_distr__state__0519C6AF" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_taluk__distr__09DE7BCC" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_villa__distr__108B795B" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_taluk__state__0AD2A005" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_villa__state__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterDataModel.FK__tbl_villa__taluk__0F975522" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
